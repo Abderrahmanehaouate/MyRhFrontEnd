@@ -1,0 +1,79 @@
+<div
+        *ngIf="totalPages === 0"
+>
+    <h1 class="text-2xl text-center font-semibold text-gray-800 mt-4"> There is no content here...</h1>
+</div>
+<div class="px-2 flex mb-5 justify-center lg:ml-6 justify-start">
+    <div class="max-w-lg w-full lg:max-w-xs">
+        <label for="search" class="sr-only">Search</label>
+        <div class="relative text-gray-400 focus-within:text-gray-600">
+            <div class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
+                <!-- Heroicon name: solid/search -->
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <input
+                    id="search" class="block w-full bg-white py-2 pl-10 pr-3 border border-transparent rounded-md leading-5 text-gray-900 placeholder-gray-500 focus:outline-none ring-2 ring-offset-2 focus:ring-offset-indigo-600 focus:ring-white focus:border-white sm:text-sm" placeholder="Search" type="search" name="search">
+        </div>
+    </div>
+</div>
+<div
+        *ngFor="let jobOffer of jobOffers"
+        routerLink="/agent/job-offers/{{jobOffer.id}}"
+        class="w-full h-64">
+    <div class="w-full flex items-start border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r">
+        <div class="h-fit lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" title="Woman holding a mug">
+            <img class="h-full" src="https://tailwindcss.com/img/card-left.jpg"  alt=""/>
+        </div>
+        <div class="w-full p-4 flex flex-col justify-between leading-normal">
+            <div class="mb-8">
+                <p class="text-sm text-grey-dark flex items-center">
+                    {{jobOffer.company.name}}
+                </p>
+                <div class="text-black font-bold text-xl mb-2">{{ jobOffer.title }}</div>
+                <p class="text-grey-darker text-base">{{ jobOffer.description }}</p>
+            </div>
+            <div class="flex items-center">
+                <div class="text-sm">
+                    <p class="text-black leading-none">{{ jobOffer.city }}</p>
+                    <p class="text-grey-dark">{{ jobOffer.createdAt }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="p-4">
+            <div class="">
+                <button
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                >
+                    Apply
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div
+        *ngIf="totalPages > 0"
+        class="flex items-center justify-center space-x-1">
+    <a
+            (click)="handlePageChange(currentPage - 1)"
+            class="flex items-center px-4 py-2 text-gray-500 bg-gray-300 rounded-md hover:bg-blue-400 hover:text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+        </svg>
+    </a>
+    <a
+            *ngFor="let page of [].constructor(this.totalPages); let i = index"
+            (click)="handlePageChange(i)"
+            [ngClass]="currentPage === i ? 'bg-blue-400 text-white' : 'bg-gray-200 text-gray-700'"
+            class="px-4 py-2 text-gray-700 rounded-md hover:bg-blue-400 hover:text-white">
+        {{i + 1}}
+    </a>
+    <a
+            (click)="handlePageChange(currentPage + 1)"
+            class="px-4 py-2 text-gray-500 bg-gray-300 rounded-md hover:bg-blue-400 hover:text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+    </a>
+</div>

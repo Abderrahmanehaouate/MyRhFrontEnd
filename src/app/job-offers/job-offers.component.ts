@@ -3,11 +3,11 @@ import {JobOfferModel} from "../models/jobOffer.model";
 import {JobOfferService} from "../services/job-offer.service";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-job-offers',
+  templateUrl: './job-offers.component.html',
+  styleUrls: ['./job-offers.component.css']
 })
-export class HomeComponent implements OnInit{
+export class JobOffersComponent implements OnInit{
 
   jobOffers: Array<JobOfferModel> = [];
 
@@ -23,17 +23,17 @@ export class HomeComponent implements OnInit{
 
   private getAllJobOffers() {
     this.service.getAllJobOffers(this.currentPage, this.pageSize, this.sortBy)
-      .subscribe({
-        next: data => {
-          //@ts-ignore
+        .subscribe({
+          next: data => {
+            //@ts-ignore
             this.jobOffers = data.content as Array<JobOfferModel>;
-          //@ts-ignore
+            //@ts-ignore
             this.totalPages = data.totalPages;
-        },
-        error: err => {
-          console.error(err);
-        }
-      });
+          },
+          error: err => {
+            console.error(err);
+          }
+        });
   }
 
   handlePageChange(number: number) {

@@ -1,1 +1,121 @@
-<p>list-job-offers works!</p>
+<div class="px-4 sm:px-6 lg:px-8">
+  <div class="sm:flex sm:items-center">
+    <div class="sm:flex-auto">
+      <h1 class="text-xl font-semibold text-gray-900">Job Offers</h1>
+      <p class="mt-2 text-sm text-gray-700">A list of all the job offers in your account including their name, title, email
+        and role.</p>
+    </div>
+  </div>
+  <div class="mt-8 flex flex-col">
+    <div class="-my-2 -mx-4 sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle">
+        <div class="shadow-sm ring-1 ring-black ring-opacity-5">
+          <table class="min-w-full border-separate" style="border-spacing: 0">
+            <thead class="bg-gray-50">
+            <tr>
+              <th scope="col"
+                  class="sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter">
+                title
+              </th>
+              <th scope="col"
+                  class="sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:pl-6 lg:pl-8">
+                description
+              </th>
+              <th scope="col"
+                  class="sticky top-0 z-10 hidden border-b border-gray-300 bg-gray-50 bg-opacity-75 px-3 py-3.5 text-center text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter sm:table-cell">
+                company name
+              </th>
+              <th scope="col"
+                  class="sticky top-0 z-10 hidden border-b border-gray-300 bg-gray-50 bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">
+                city
+              </th>
+              <th scope="col"
+                  class="sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter">
+                education level
+              </th>
+              <th scope="col"
+                  class="sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter lg:table-cell">
+                status
+              </th>
+              <th scope="col"
+                  class="sticky top-0 z-10 border-b border-gray-300 bg-gray-50 bg-opacity-75 py-3.5 pr-4 pl-3 backdrop-blur backdrop-filter sm:pr-6 lg:pr-8">
+                <span
+                  class="">
+                  Validation
+                </span>
+              </th>
+            </tr>
+            </thead>
+            <tbody class="bg-white">
+            <tr
+              *ngFor="let jobOffer of jobOffers"
+            >
+              <td
+                class="whitespace-nowrap border-b border-gray-200 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
+                {{jobOffer.title}}
+              </td>
+              <td
+                class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 text-center hidden lg:table-cell">
+                {{jobOffer.description}}
+              </td>
+              <td
+                class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 hidden lg:table-cell">
+                {{ jobOffer.company.name }}
+              </td>
+              <td
+                class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 hidden lg:table-cell">
+                {{jobOffer.city }}
+              </td>
+              <td
+                class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500">
+                {{ jobOffer.educationLevel }}
+              </td>
+              <td
+                class="whitespace-nowrap border-b border-gray-200 px-3 py-4 text-sm text-gray-500 text-center hidden sm:table-cell">
+                {{jobOffer.status }}
+              </td>
+              <td
+                class="relative whitespace-nowrap border-b border-gray-200 py-4 pr-4 pl-3 text-right text-sm font-medium sm:pr-6 lg:pr-8">
+                <a
+                  (mousedown)="deleteJobOfferById(jobOffer.id, $event)"
+                  class="text-blue-500 hover:cursor-pointer px-2 hover:text-indigo-900">
+                  Accept
+                  </a>
+                <a
+                  (mousedown)="deleteJobOfferById(jobOffer.id, $event)"
+                  class="text-red-500 hover:cursor-pointer px-2 hover:text-indigo-900">
+                  refuse
+                  </a>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="flex mt-5 items-center justify-center space-x-1">
+          <a
+            (click)="handlePageChange(currentPage - 1)"
+            class="flex items-center px-4 py-2 text-gray-500 bg-gray-300 rounded-md hover:bg-blue-400 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+            </svg>
+          </a>
+          <a
+            *ngFor="let page of [].constructor(this.totalPages); let i = index"
+            (click)="handlePageChange(i)"
+            [ngClass]="currentPage === i ? 'bg-blue-400 text-white' : 'bg-gray-200 text-gray-700'"
+            class="px-4 py-2 text-gray-700 rounded-md hover:bg-blue-400 hover:text-white">
+            {{i + 1}}
+          </a>
+          <a
+            (click)="handlePageChange(currentPage + 1)"
+            class="px-4 py-2 text-gray-500 bg-gray-300 rounded-md hover:bg-blue-400 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

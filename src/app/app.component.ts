@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MyRh';
+  actions : Array<any> = [
+    {title: "Home", link: ""},
+    {title: "job Offers", link: "/jobOffers"},
+  ];
+
+  currentAction: any;
+  setCurrentAction(action: any) {
+    this.currentAction = action;
+  }
 }

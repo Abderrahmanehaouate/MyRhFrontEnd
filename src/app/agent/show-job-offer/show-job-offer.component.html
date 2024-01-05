@@ -1,0 +1,102 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="max-w-3xl mx-auto">
+    <!-- Blog post header -->
+    <div class="py-8">
+      <h1 class="text-4xl font-extrabold mb-4">{{jobOffer.title}}</h1>
+      <p class="text-gray-600 text-sm">Published on <time datetime="2022-04-05">{{ jobOffer.createdAt }}</time></p>
+    </div>
+
+    <img src="https://images.unsplash.com/photo-1493723843671-1d655e66ac1c" alt="Featured image" class="w-full h-auto mb-8 border rounded-lg shadow-lg">
+
+    <div class="prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto">
+      <p>{{ jobOffer.description }}</p>
+    </div>
+    <div class="flex items-center mt-10 justify-center w-full">
+        <form>
+          <div class="grid gap-6 mb-6 lg:grid-cols-2">
+
+            <div>
+              <label for="firstName"
+                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
+                first name
+              </label>
+              <input type="text"
+                     id="firstName"
+                     name="lastName"
+                     [(ngModel)]="postulation.firstName"
+                     class="bg-amber-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     placeholder="abderrahman"
+                     required>
+            </div>
+            <div>
+              <label for="lastName"
+                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
+                last name
+              </label>
+              <input type="text"
+                     id="lastName"
+                     name="lastName"
+                     [(ngModel)]="postulation.lastName"
+                     class="bg-amber-500 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     placeholder="haouate"
+                     required>
+            </div>
+          </div>
+          <div class="mb-6">
+            <label
+                    for="numero_de_telephone"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              numero de telephone
+            </label>
+            <input
+                    type="number"
+                    id="numero_de_telephone"
+                    name="num"
+                    [(ngModel)]="postulation.phone"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="+212 6 00 00 00 00"
+                    required
+            >
+          </div>
+          <div class="mb-6">
+            <label
+                    for="email"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              email
+            </label>
+            <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    [(ngModel)]="postulation.email"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Enter your email address"
+                    required
+            >
+          </div>
+          <div class="mb-6">
+            <label
+                    for="file"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              import your cv
+            </label>
+            <input
+                    type="file"
+                    id="file"
+                    [(ngModel)]="postulation.cv"
+                    name="file"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-50 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="import your cv here"
+                    (change)="onFileSelected($event)"
+                    required
+            >
+          </div>
+          <Button (click)="applyToJobOffer(postulation, jobOffer.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            postuler
+          </Button>
+        </form>
+      </div>
+    </div>
+  </div>
